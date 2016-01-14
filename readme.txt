@@ -18,9 +18,9 @@ DCO Insert Analytics Code is a Wordpress plugin is intended for insert analytics
 After installation and activation, you can insert the necessary code to the respective fields on the plugin settings page.
 
 = Settings =
-* Transliterate url
-* Transliterate file name
-* Correct dates
+* Before &lt;/head&gt; code
+* After &lt;body&gt; code
+* Before &lt;/body&gt; code
 
 = Filters list =
 **dco_iac_get_options**
