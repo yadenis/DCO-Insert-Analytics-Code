@@ -23,9 +23,9 @@ Filter to change the code is inserted before &lt;/body&gt;
 ```php
 function custom_get_options($current, $options, $default) {
     $array = array(
-        'before_head' => '<!-- before head11 -->',
-        'after_body'  => '<!-- after body11 -->',
-        'before_body' => '<!-- before body11 -->'
+        'before_head' => '<!-- before head -->',
+        'after_body'  => '<!-- after body -->',
+        'before_body' => '<!-- before body -->'
     );
 
     return $array;
@@ -51,7 +51,7 @@ function custom_before_head_code( $code ) {
 add_filter( 'dco_iac_insert_before_head', 'custom_before_head_code' );
 
 /*
-* $code - value from before </head> setting
+* $code - value from "before </head>" setting
 */
 ```
 
