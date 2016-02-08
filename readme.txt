@@ -1,5 +1,6 @@
 === DCO Insert Analytics Code ===
 Contributors: denisco
+Donate link: https://www.paypal.me/yadenis
 Tags: analytics, metrika, yandex metrica, google analytics
 Requires at least: 4.4
 Tested up to: 4.4
