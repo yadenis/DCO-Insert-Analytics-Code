@@ -54,8 +54,7 @@ Filter to change show the code is inserted before &lt;/body&gt;
 
 = Examples of using filters =
 **Hardcoding override plugin settings**
-`php
-function custom_get_options($current, $options, $default) {
+`function custom_get_options($current, $options, $default) {
     $array = array(
         'before_head' => '<!-- before </head> -->',
         'before_head_show' => '0',
