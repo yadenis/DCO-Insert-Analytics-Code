@@ -1,8 +1,44 @@
 <?php
+defined('ABSPATH') or die;
 
 class DCO_IAC_Admin extends DCO_IAC_Base {
 
+    protected $sections;
+
+    public function __call($name, $arguments) {
+        $name_array = explode('_', $name);
+        if (count($name_array) < 3) {
+            return false;
+        }
+
+        $option_name = $name_array[0] . '_' . $name_array[1];
+        if ($name_array[2] == 'render') {
+            ?>
+            <textarea rows="10" style="width:100%;" name="dco_iac[<?php echo $option_name; ?>]" <?php disabled(has_filter('dco_iac_get_options')) ?>><?php echo $this->options[$option_name]; ?></textarea>
+            <?php
+        }
+
+        if ($name_array[2] == 'show') {
+            ?>
+            <select name="dco_iac[<?php echo $option_name; ?>_show]" <?php disabled(has_filter('dco_iac_get_options')) ?>>
+                <option value="0" <?php selected($this->options[$option_name . '_show'], '0'); ?>><?php esc_html_e('All Users', 'dco-insert-analytics-code'); ?></option>
+                <option value="1" <?php selected($this->options[$option_name . '_show'], '1'); ?>><?php esc_html_e('Not Logged Users', 'dco-insert-analytics-code'); ?></option>
+                <option value="2" <?php selected($this->options[$option_name . '_show'], '2'); ?>><?php esc_html_e('Logged Users', 'dco-insert-analytics-code'); ?></option>
+            </select>
+            <?php
+        }
+    }
+
     public function __construct() {
+        $this->sections = array(
+            /* translators: Before </head> */
+            'before_head' => __('Before', 'dco-insert-analytics-code') . ' ' . esc_html('</head>'),
+            /* translators: After <body> */
+            'after_body' => __('After', 'dco-insert-analytics-code') . ' ' . esc_html('<body>'),
+            /* translators: Before </body> */
+            'before_body' => __('Before', 'dco-insert-analytics-code') . ' ' . esc_html('</body>')
+        );
+
         add_action('init', array($this, 'init_hooks'));
     }
 
@@ -18,58 +54,40 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
 
     public function register_plugin_links($links, $file) {
         if ($file == DCO_IAC__PLUGIN_BASENAME) {
-            $links[] = '<a href="https://github.com/Denis-co/DCO-Insert-Analytics-Code">' . __('GitHub', 'dco-iac') . '</a>';
+            $links[] = '<a href="https://github.com/Denis-co/DCO-Insert-Analytics-Code">' . __('GitHub', 'dco-insert-analytics-code') . '</a>';
         }
 
         return $links;
     }
 
     public function create_menu() {
-        add_options_page(__('DCO Insert Analytics Code', 'dco-iac'), __('DCO Insert Analytics Code', 'dco-iac'), 'manage_options', 'dco_insert_code_analytics', array($this, 'render'));
+        add_options_page(__('DCO Insert Analytics Code', 'dco-insert-analytics-code'), __('DCO Insert Analytics Code', 'dco-insert-analytics-code'), 'manage_options', 'dco-insert-analytics-code', array($this, 'render'));
     }
 
     public function register_settings() {
         register_setting('dco_iac', 'dco_iac');
 
-        add_settings_section(
-                'dco_iac_general', '', '', 'dco_iac'
-        );
+        foreach ($this->sections as $key => $title) {
+            $section_key = 'dco_iac_' . $key;
 
-        add_settings_field(
-                'before_head', __('Before &lt;/head&gt;', 'dco-iac'), array($this, 'before_head_render'), 'dco_iac', 'dco_iac_general'
-        );
+            add_settings_section(
+                    $section_key, $title, '', 'dco_iac'
+            );
 
-        add_settings_field(
-                'after_body', __('After &lt;body&gt;', 'dco-iac'), array($this, 'after_body_render'), 'dco_iac', 'dco_iac_general'
-        );
+            add_settings_field(
+                    $key, __('Code', 'dco-insert-analytics-code'), array($this, $key . '_render'), 'dco_iac', $section_key
+            );
 
-        add_settings_field(
-                'before_body', __('Before &lt;/body&gt;', 'dco-iac'), array($this, 'before_body_render'), 'dco_iac', 'dco_iac_general'
-        );
-    }
-
-    public function before_head_render() {
-        ?>
-        <textarea rows="10" style="width:100%;" name="dco_iac[before_head]" <?php disabled(has_filter('dco_iac_get_options')) ?>><?php echo $this->options['before_head']; ?></textarea>
-        <?php
-    }
-
-    public function after_body_render() {
-        ?>
-        <textarea rows="10" style="width:100%;" name="dco_iac[after_body]" <?php disabled(has_filter('dco_iac_get_options')) ?>><?php echo $this->options['after_body']; ?></textarea>
-        <?php
-    }
-
-    public function before_body_render() {
-        ?>
-        <textarea rows="10" style="width:100%;" name="dco_iac[before_body]" <?php disabled(has_filter('dco_iac_get_options')) ?>><?php echo $this->options['before_body']; ?></textarea>
-        <?php
+            add_settings_field(
+                    $key . '_show', __('Show Code', 'dco-insert-analytics-code'), array($this, $key . '_show_render'), 'dco_iac', $section_key
+            );
+        }
     }
 
     function render() {
         ?>
         <div class="wrap">
-            <h1><?php _e('DCO Insert Analytics Code', 'dco-iac'); ?></h1>
+            <h1><?php _e('DCO Insert Analytics Code', 'dco-insert-analytics-code'); ?></h1>
             <form action="options.php" method="post">
                 <?php
                 settings_fields('dco_iac');

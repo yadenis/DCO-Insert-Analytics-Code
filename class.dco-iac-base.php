@@ -1,4 +1,5 @@
 <?php
+defined('ABSPATH') or die;
 
 class DCO_IAC_Base {
 
@@ -12,8 +13,11 @@ class DCO_IAC_Base {
     protected function get_options() {
         $default = array(
             'before_head' => '',
+            'before_head_show' => '',
             'after_body' => '',
-            'before_body' => ''
+            'after_body_show' => '',
+            'before_body' => '',
+            'before_body_show' => ''
         );
 
         $options = get_option('dco_iac');
@@ -25,7 +29,7 @@ class DCO_IAC_Base {
     }
 
     public function load_language() {
-        load_plugin_textdomain('dco-iac', false, plugin_basename(DCO_IAC__PLUGIN_DIR) . '/languages');
+        load_plugin_textdomain('dco-insert-analytics-code', false, plugin_basename(DCO_IAC__PLUGIN_DIR) . '/languages');
     }
 
 }
