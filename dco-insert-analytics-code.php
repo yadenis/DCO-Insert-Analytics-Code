@@ -1,15 +1,13 @@
 <?php
 
 /*
-  Plugin Name: DCO insert analytics code
-  Plugin URI: https://github.com/Denis-co/DCO-Insert-Analytics-Code
-  Description: Allows you to insert analytics code before </head> or after <body> or before </body>
-  Version: 1.1.0
-  Author: Denis co.
+  Plugin Name: DCO Insert Analytics Code
+  Description: Allows you to insert analytics code before &lt;/head&gt; or after &lt;body&gt; or before &lt;/body&gt;
+  Version: 1.1.3
+  Author: Denis Yanchevskiy
   Author URI: http://denisco.pro
   License: GPLv2 or later
   Text Domain: dco-insert-analytics-code
-  Domain Path: /languages
  */
 
 defined('ABSPATH') or die;

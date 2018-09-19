@@ -1,4 +1,5 @@
 <?php
+
 defined('ABSPATH') or die;
 
 class DCO_IAC_Base {
@@ -7,7 +8,12 @@ class DCO_IAC_Base {
 
     protected function init_hooks() {
         $this->get_options();
-        add_action('admin_init', array($this, 'load_language'));
+
+        if (!apply_filters('dco_iac_disable_do_shortcode', false)) {
+            add_filter('dco_iac_insert_before_head', 'do_shortcode');
+            add_filter('dco_iac_insert_before_body', 'do_shortcode');
+            add_filter('dco_iac_insert_after_body', 'do_shortcode');
+        }
     }
 
     protected function get_options() {
@@ -26,10 +32,6 @@ class DCO_IAC_Base {
         }
 
         $this->options = apply_filters('dco_iac_get_options', wp_parse_args($options, $default), $options, $default);
-    }
-
-    public function load_language() {
-        load_plugin_textdomain('dco-insert-analytics-code', false, plugin_basename(DCO_IAC__PLUGIN_DIR) . '/languages');
     }
 
 }

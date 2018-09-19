@@ -24,6 +24,7 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
                 <option value="0" <?php selected($this->options[$option_name . '_show'], '0'); ?>><?php esc_html_e('All Users', 'dco-insert-analytics-code'); ?></option>
                 <option value="1" <?php selected($this->options[$option_name . '_show'], '1'); ?>><?php esc_html_e('Not Logged Users', 'dco-insert-analytics-code'); ?></option>
                 <option value="2" <?php selected($this->options[$option_name . '_show'], '2'); ?>><?php esc_html_e('Logged Users', 'dco-insert-analytics-code'); ?></option>
+                <option value="3" <?php selected($this->options[$option_name . '_show'], '3'); ?>><?php esc_html_e('Nobody', 'dco-insert-analytics-code'); ?></option>
             </select>
             <?php
         }
@@ -49,13 +50,13 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
         add_action('admin_menu', array($this, 'create_menu'));
 
         //Additional links on the plugin page
-        add_filter('plugin_row_meta', array($this, 'register_plugin_links'), 10, 2);
+        add_filter('plugin_action_links_' . DCO_IAC__PLUGIN_BASENAME, array($this, 'register_plugin_links'));
     }
 
-    public function register_plugin_links($links, $file) {
-        if ($file == DCO_IAC__PLUGIN_BASENAME) {
-            $links[] = '<a href="https://github.com/Denis-co/DCO-Insert-Analytics-Code">' . __('GitHub', 'dco-insert-analytics-code') . '</a>';
-        }
+    public function register_plugin_links($links) {
+        array_unshift($links, sprintf(
+            '<a href="%1$s" title="%2$s">%3$s</a>', self_admin_url('options-general.php?page=dco-insert-analytics-code'), esc_attr__('Manage your codes', 'dco-insert-analytics-code'), esc_html__('Settings', 'dco-insert-analytics-code')
+        ));
 
         return $links;
     }
@@ -101,4 +102,4 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
 
 }
 
-$dco_iac_admin = new DCO_IAC_Admin();
+$GLOBALS['dco_iac_admin'] = new DCO_IAC_Admin();

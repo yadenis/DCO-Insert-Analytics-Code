@@ -1,4 +1,5 @@
 <?php
+
 defined('ABSPATH') or die;
 
 class DCO_IAC extends DCO_IAC_Base {
@@ -16,6 +17,8 @@ class DCO_IAC extends DCO_IAC_Base {
                 return !$user_logged;
             case '2':
                 return $user_logged;
+            case '3':
+                return false;
             default:
                 return true;
         }
@@ -71,4 +74,4 @@ class DCO_IAC extends DCO_IAC_Base {
 
 }
 
-$dco_iac = new DCO_IAC();
+$GLOBALS['dco_iac'] = new DCO_IAC();

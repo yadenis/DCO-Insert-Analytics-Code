@@ -1,1 +1,9 @@
 /nbproject
+/.phpcs.xml.dist
+/tests/
+/composer.json
+/.travis.yml
+/bin/
+/composer.lock
+/vendor/
+/phpunit.xml.dist
