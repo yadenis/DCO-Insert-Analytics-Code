@@ -14,23 +14,25 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
 		$option_name = $name_array[0] . '_' . $name_array[1];
 		if ( $name_array[2] == 'render' ) {
 			?>
-			<textarea rows="10" style="width:100%;" name="dco_iac[<?php echo $option_name; ?>]" <?php disabled( has_filter( 'dco_iac_get_options' ) ) ?>><?php echo $this->options[$option_name]; ?></textarea>
+			<textarea rows="10" style="width:100%;" name="dco_iac[<?php echo $option_name; ?>]" <?php disabled( has_filter( 'dco_iac_get_options' ) ) ?>><?php echo $this->get_option( $option_name ); ?></textarea>
 			<?php
 		}
 
 		if ( $name_array[2] == 'show' ) {
 			?>
 			<select name="dco_iac[<?php echo $option_name; ?>_show]" <?php disabled( has_filter( 'dco_iac_get_options' ) ) ?>>
-				<option value="0" <?php selected( $this->options[$option_name . '_show'], '0' ); ?>><?php esc_html_e( 'All Users', 'dco-insert-analytics-code' ); ?></option>
-				<option value="1" <?php selected( $this->options[$option_name . '_show'], '1' ); ?>><?php esc_html_e( 'Not Logged Users', 'dco-insert-analytics-code' ); ?></option>
-				<option value="2" <?php selected( $this->options[$option_name . '_show'], '2' ); ?>><?php esc_html_e( 'Logged Users', 'dco-insert-analytics-code' ); ?></option>
-				<option value="3" <?php selected( $this->options[$option_name . '_show'], '3' ); ?>><?php esc_html_e( 'Nobody', 'dco-insert-analytics-code' ); ?></option>
+				<option value="0" <?php selected( $this->get_option( $option_name . '_show' ), '0' ); ?>><?php esc_html_e( 'All Users', 'dco-insert-analytics-code' ); ?></option>
+				<option value="1" <?php selected( $this->get_option( $option_name . '_show' ), '1' ); ?>><?php esc_html_e( 'Not Logged Users', 'dco-insert-analytics-code' ); ?></option>
+				<option value="2" <?php selected( $this->get_option( $option_name . '_show' ), '2' ); ?>><?php esc_html_e( 'Logged Users', 'dco-insert-analytics-code' ); ?></option>
+				<option value="3" <?php selected( $this->get_option( $option_name . '_show' ), '3' ); ?>><?php esc_html_e( 'Nobody', 'dco-insert-analytics-code' ); ?></option>
 			</select>
 			<?php
 		}
 	}
 
 	public function __construct() {
+		parent::__construct();
+
 		$this->sections = array(
 			/* translators: Before </head> */
 			'before_head' => __( 'Before', 'dco-insert-analytics-code' ) . ' ' . esc_html( '</head>' ),

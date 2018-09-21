@@ -4,11 +4,13 @@ defined( 'ABSPATH' ) or die;
 
 class DCO_IAC_Base {
 
-	protected $options = array();
+	private $options = array();
 
-	protected function init_hooks() {
-		$this->get_options();
+	public function __construct() {
+		$this->set_options();
+	}
 
+	public function init_hooks() {
 		if ( ! apply_filters( 'dco_iac_disable_do_shortcode', false ) ) {
 			add_filter( 'dco_iac_insert_before_head', 'do_shortcode' );
 			add_filter( 'dco_iac_insert_before_body', 'do_shortcode' );
@@ -16,7 +18,7 @@ class DCO_IAC_Base {
 		}
 	}
 
-	protected function get_options() {
+	public function set_options() {
 		$default = array(
 			'before_head' => '',
 			'before_head_show' => '',
@@ -32,6 +34,18 @@ class DCO_IAC_Base {
 		}
 
 		$this->options = apply_filters( 'dco_iac_get_options', wp_parse_args( $options, $default ), $options, $default );
+	}
+
+	public function get_options() {
+		return $this->options;
+	}
+
+	public function get_option( $name ) {
+		if ( isset( $this->options[$name] ) ) {
+			return $this->options[$name];
+		}
+
+		return false;
 	}
 
 }
