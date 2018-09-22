@@ -1,5 +1,3 @@
 /nbproject
-/.phpcs.xml.dist
-/.travis.yml
 /composer.lock
 /vendor/
