@@ -1,4 +1,4 @@
 /nbproject
 /composer.lock
 /vendor/
-/.phpcs.xml.dist
+/wpcs/
