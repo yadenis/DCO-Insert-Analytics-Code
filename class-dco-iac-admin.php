@@ -1,5 +1,5 @@
 <?php
-defined( 'ABSPATH' ) or die;
+defined( 'ABSPATH' ) || die;
 
 class DCO_IAC_Admin extends DCO_IAC_Base {
 

@@ -1,6 +1,6 @@
 <?php
 
-defined( 'ABSPATH' ) or die;
+defined( 'ABSPATH' ) || die;
 
 class DCO_IAC_Base {
 
@@ -20,12 +20,12 @@ class DCO_IAC_Base {
 
 	public function set_options() {
 		$default = array(
-			'before_head' => '',
+			'before_head'      => '',
 			'before_head_show' => '',
-			'after_body' => '',
-			'after_body_show' => '',
-			'before_body' => '',
-			'before_body_show' => ''
+			'after_body'       => '',
+			'after_body_show'  => '',
+			'before_body'      => '',
+			'before_body_show' => '',
 		);
 
 		$options = get_option( 'dco_iac' );
@@ -41,8 +41,8 @@ class DCO_IAC_Base {
 	}
 
 	public function get_option( $name ) {
-		if ( isset( $this->options[$name] ) ) {
-			return $this->options[$name];
+		if ( isset( $this->options[ $name ] ) ) {
+			return $this->options[ $name ];
 		}
 
 		return false;
