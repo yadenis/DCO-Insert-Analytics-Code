@@ -4,8 +4,9 @@
  *
  * @package DCOIAC
  * @author Denis Yanchevskiy
- * @copyright 2016
+ * @copyright 2016-2018
  * @license GPLv2+
+ * @since 1.0.0
  *
  * @wordpress-plugin
  * Plugin Name: DCO Insert Analytics Code
