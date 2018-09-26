@@ -1,16 +1,24 @@
 <?php
 /**
  * Public functions: DCO_IAC class
- * 
- * @package DCOIAC
+ *
+ * @package DCO_Insert_Analytics_Code
  * @author Denis Yanchevskiy
  * @copyright 2016-2018
  * @license GPLv2+
+ *
  * @since 1.0.0
  */
 
 defined( 'ABSPATH' ) || die;
 
+/**
+ * Class with public functions.
+ *
+ * @since 1.0.0
+ *
+ * @see DCO_IAC_Base
+ */
 class DCO_IAC extends DCO_IAC_Base {
 
 	public function __construct() {

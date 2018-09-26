@@ -1,28 +1,29 @@
 <?php
 /**
  * Basic functions: DCO_IAC_Base class
- * 
- * @package DCOIAC
+ *
+ * @package DCO_Insert_Analytics_Code
  * @author Denis Yanchevskiy
  * @copyright 2016-2018
  * @license GPLv2+
+ *
  * @since 1.0.0
  */
 
 defined( 'ABSPATH' ) || die;
 
 /**
- * Class with basic functions
- * 
+ * Class with basic functions.
+ *
  * @since 1.0.0
  */
 class DCO_IAC_Base {
 
 	/**
-	 * Array of plugin options
+	 * Array of plugin options.
 	 *
 	 * @since 1.0.0
-	 * @var array
+	 * @var array $options Plugin options.
 	 */
 	private $options = array();
 
@@ -36,11 +37,18 @@ class DCO_IAC_Base {
 	}
 
 	/**
-	 * Initialize basic hooks
-	 * 
+	 * Initializes basic hooks.
+	 *
 	 * @since 1.1.2
 	 */
 	public function init_hooks() {
+		/**
+		 * Filters enable or disable shortcode processing in insert codes.
+		 *
+		 * @since 1.1.2
+		 *
+		 * @param bool $disable Disable shortcode processing if true. Default false.
+		 */
 		if ( ! apply_filters( 'dco_iac_disable_do_shortcode', false ) ) {
 			add_filter( 'dco_iac_insert_before_head', 'do_shortcode' );
 			add_filter( 'dco_iac_insert_before_body', 'do_shortcode' );
@@ -49,8 +57,8 @@ class DCO_IAC_Base {
 	}
 
 	/**
-	 * Set plugin options to the `$options` property from the database
-	 * 
+	 * Sets plugin options to the `$options` property from the database.
+	 *
 	 * @since 1.0.0
 	 */
 	public function set_options() {
@@ -65,28 +73,38 @@ class DCO_IAC_Base {
 
 		$options = get_option( 'dco_iac' );
 		if ( is_array( $options ) ) {
+			// Clears empty typos.
 			$options = array_map( 'trim', $options );
 		}
 
+		/**
+		 * Filters plugin options.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $current Current plugin options.
+		 * @param array $options Plugin options from database.
+		 * @param array $default Default plugin options.
+		 */
 		$this->options = apply_filters( 'dco_iac_get_options', wp_parse_args( $options, $default ), $options, $default );
 	}
 
 	/**
-	 * Get plugin options
-	 * 
+	 * Gets all plugin options.
+	 *
 	 * @since 1.2.0
-	 * 
-	 * @return array Array of plugin options
+	 *
+	 * @return array Array of plugin options.
 	 */
 	public function get_options() {
 		return $this->options;
 	}
 
 	/**
-	 * Get plugin option
-	 * 
+	 * Gets plugin option by name.
+	 *
 	 * @since 1.2.0
-	 * 
+	 *
 	 * @param string $name Option name.
 	 * @return mixed|false Return the value of the option if it is found, false if the option does not exist.
 	 */

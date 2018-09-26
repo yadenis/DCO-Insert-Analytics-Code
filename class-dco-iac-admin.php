@@ -1,14 +1,14 @@
 <?php
 /**
  * Admin functions: DCO_IAC_Admin class
- * 
- * @package DCOIAC
+ *
+ * @package DCO_Insert_Analytics_Code
  * @author Denis Yanchevskiy
  * @copyright 2016-2018
  * @license GPLv2+
+ *
  * @since 1.0.0
  */
-
 defined( 'ABSPATH' ) || die;
 
 class DCO_IAC_Admin extends DCO_IAC_Base {
@@ -24,13 +24,13 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
 		$option_name = $name_array[0] . '_' . $name_array[1];
 		if ( 'render' === $name_array[2] ) {
 			?>
-			<textarea rows="10" style="width:100%;" name="dco_iac[<?php echo esc_attr( $option_name ); ?>]" <?php disabled( has_filter( 'dco_iac_get_options' ) ); ?>><?php echo $this->get_option( $option_name ); ?></textarea>
+			<textarea rows="10" style="width:100%;" name="dco_iac[<?php echo esc_attr( $option_name ); ?>]" <?php disabled( has_filter( 'dco_iac_get_options' ) ); ?>><?php echo esc_textarea( $this->get_option( $option_name ) ); ?></textarea>
 			<?php
 		}
 
 		if ( 'show' === $name_array[2] ) {
 			?>
-			<select name="dco_iac[<?php echo $option_name; ?>_show]" <?php disabled( has_filter( 'dco_iac_get_options' ) ); ?>>
+			<select name="dco_iac[<?php echo esc_attr( $option_name ); ?>_show]" <?php disabled( has_filter( 'dco_iac_get_options' ) ); ?>>
 				<option value="0" <?php selected( $this->get_option( $option_name . '_show' ), '0' ); ?>><?php esc_html_e( 'All Users', 'dco-insert-analytics-code' ); ?></option>
 				<option value="1" <?php selected( $this->get_option( $option_name . '_show' ), '1' ); ?>><?php esc_html_e( 'Not Logged Users', 'dco-insert-analytics-code' ); ?></option>
 				<option value="2" <?php selected( $this->get_option( $option_name . '_show' ), '2' ); ?>><?php esc_html_e( 'Logged Users', 'dco-insert-analytics-code' ); ?></option>
@@ -61,7 +61,7 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_menu', array( $this, 'create_menu' ) );
 
-		// Additional links on the plugin page
+		// Additional links on the plugin page.
 		add_filter( 'plugin_action_links_' . DCO_IAC__PLUGIN_BASENAME, array( $this, 'register_plugin_links' ) );
 	}
 
@@ -114,10 +114,10 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
 		}
 	}
 
-	function render() {
+	public function render() {
 		?>
 		<div class="wrap">
-			<h1><?php _e( 'DCO Insert Analytics Code', 'dco-insert-analytics-code' ); ?></h1>
+			<h1><?php esc_html_e( 'DCO Insert Analytics Code', 'dco-insert-analytics-code' ); ?></h1>
 			<form action="options.php" method="post">
 				<?php
 				settings_fields( 'dco_iac' );

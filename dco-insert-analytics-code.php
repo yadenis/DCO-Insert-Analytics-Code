@@ -2,13 +2,13 @@
 /**
  * DCO Insert Analytics Code
  *
- * @package DCOIAC
+ * @package DCO_Insert_Analytics_Code
  * @author Denis Yanchevskiy
  * @copyright 2016-2018
  * @license GPLv2+
+ *
  * @since 1.0.0
  *
- * @wordpress-plugin
  * Plugin Name: DCO Insert Analytics Code
  * Description: Allows you to insert analytics code before &lt;/head&gt; or after &lt;body&gt; or before &lt;/body&gt;
  * Version: 1.1.3
