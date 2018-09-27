@@ -123,7 +123,7 @@ class DCO_IAC_Admin extends DCO_IAC_Base {
 	}
 
 	/**
-	 * Adds an options page to the "Setting" section in the admin menu.
+	 * Adds an options page to the settings section in the admin menu.
 	 *
 	 * @since 1.0.0
 	 */
