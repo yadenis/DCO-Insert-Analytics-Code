@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || die;
 class DCO_IAC_Base {
 
 	/**
-	 * Array of plugin options.
+	 * An array of plugin options.
 	 *
 	 * @since 1.0.0
 	 * @var array $options Plugin options.
@@ -37,7 +37,7 @@ class DCO_IAC_Base {
 	}
 
 	/**
-	 * Initializes basic hooks.
+	 * Initializes filters for shortcode processing in insert codes.
 	 *
 	 * @since 1.1.2
 	 */
@@ -47,7 +47,7 @@ class DCO_IAC_Base {
 		 *
 		 * @since 1.1.2
 		 *
-		 * @param bool $disable Disable shortcode processing if true. Default false.
+		 * @param bool $disable Disables shortcode processing if true. Default false.
 		 */
 		if ( ! apply_filters( 'dco_iac_disable_do_shortcode', false ) ) {
 			add_filter( 'dco_iac_insert_before_head', 'do_shortcode' );
@@ -94,19 +94,19 @@ class DCO_IAC_Base {
 	 *
 	 * @since 1.2.0
 	 *
-	 * @return array Array of plugin options.
+	 * @return array $options An array of plugin options.
 	 */
 	public function get_options() {
 		return $this->options;
 	}
 
 	/**
-	 * Gets plugin option by name.
+	 * Gets the plugin option by the name.
 	 *
 	 * @since 1.2.0
 	 *
-	 * @param string $name Option name.
-	 * @return mixed|false Return the value of the option if it is found, false if the option does not exist.
+	 * @param string $name The option name.
+	 * @return mixed|false Returns the value of the option if it is found, false if the option does not exist.
 	 */
 	public function get_option( $name ) {
 		if ( isset( $this->options[ $name ] ) ) {

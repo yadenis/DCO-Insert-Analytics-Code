@@ -37,8 +37,8 @@ class DCO_IAC extends DCO_IAC_Base {
 	 *
 	 * @since 1.1.1
 	 *
-	 * @param string $option_name Option name.
-	 * @return bool Return true if the code needs to be displayed or false, if not.
+	 * @param string $option_name The option name.
+	 * @return bool $show Returns true if the code needs to be displayed or false, if not.
 	 */
 	public function check_show( $option_name ) {
 		$user_logged = is_user_logged_in();
@@ -77,44 +77,49 @@ class DCO_IAC extends DCO_IAC_Base {
 	public function init_hooks() {
 		parent::init_hooks();
 
-		if ( ! empty( $this->get_option( 'before_head' ) ) && $this->check_show( 'before_head' ) ) {
+		$before_head = $this->get_option( 'before_head' );
+		if ( ! empty( $before_head ) && $this->check_show( 'before_head' ) ) {
 			add_action( 'wp_head', array( $this, 'insert_before_head' ), 99 );
 		}
 
-		if ( ! empty( $this->get_option( 'after_body' ) ) && $this->check_show( 'after_body' ) ) {
+		$after_body = $this->get_option( 'after_body' );
+		if ( ! empty( $after_body ) && $this->check_show( 'after_body' ) ) {
 			add_filter( 'template_include', array( $this, 'insert_after_body' ), 99 );
 		}
 
-		if ( ! empty( $this->get_option( 'before_body' ) ) && $this->check_show( 'before_body' ) ) {
+		$before_body = $this->get_option( 'before_body' );
+		if ( ! empty( $before_body ) && $this->check_show( 'before_body' ) ) {
 			add_action( 'wp_footer', array( $this, 'insert_before_body' ), 99 );
 		}
 	}
 
 	/**
-	 * Inserts code before head tag
+	 * Inserts the code before the head tag.
 	 *
 	 * @since 1.0.0
 	 */
 	public function insert_before_head() {
 		/**
-		 * Filters `before_head` option value
+		 * Filters the `before_head` code output.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $code `before_head` option value
+		 * @param string $code The `before_head` code output.
 		 */
+		// phpcs:disable
 		echo apply_filters( 'dco_iac_insert_before_head', $this->get_option( 'before_head' ) . "\n" );
+		// phpcs:enable
 	}
 
 	/**
-	 * Inserts code after body tag
+	 * Inserts the code after the body tag.
 	 *
 	 * @since 1.0.0
 	 *
 	 * {@see 'template_include'}
 	 *
 	 * @param string $template The path of the template to include.
-	 * return string The path of the template to include.
+	 * @return string $template The path of the template to include.
 	 */
 	public function insert_after_body( $template ) {
 		ob_start( array( $this, 'insert_after_body_code' ) );
@@ -123,38 +128,40 @@ class DCO_IAC extends DCO_IAC_Base {
 	}
 
 	/**
-	 * Inserts code before body tag
+	 * Inserts the code before the body tag.
 	 *
 	 * @since 1.0.0
 	 */
 	public function insert_before_body() {
 		/**
-		 * Filters `before_body` option value
+		 * Filters the `before_body` code output.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $code `before_body` option value
+		 * @param string $code The `before_body` code output.
 		 */
+		// phpcs:disable
 		echo apply_filters( 'dco_iac_insert_before_body', $this->get_option( 'before_body' ) . "\n" );
+		// phpcs:enable
 	}
 
 	/**
-	 * Helper function for `insert_after_body` function (callback for ob_start)
+	 * A helper function for the `insert_after_body` function (callback for ob_start).
 	 *
 	 * @see DCO_IAC::insert_after_body()
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $buffer Output template html.
-	 * return string Output template html with inserted code.
+	 * @param string $buffer The output template html.
+	 * @return string $buffer Outputs the template html with the inserted code.
 	 */
 	public function insert_after_body_code( $buffer ) {
 		/**
-		 * Filters `after_body` option value
+		 * Filters the `after_body` code output.
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $code `after_body` option value
+		 * @param string $code The `after_body` code output.
 		 */
 		$buffer = preg_replace( '@<body[^>]*>@', '$0' . apply_filters( 'dco_iac_insert_after_body', "\n" . $this->get_option( 'after_body' ) ), $buffer );
 
