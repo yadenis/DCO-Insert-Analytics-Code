@@ -64,11 +64,11 @@ class DCO_IAC_Base {
 	public function set_options() {
 		$default = array(
 			'before_head'      => '',
-			'before_head_show' => '',
+			'before_head_show' => '0',
 			'after_body'       => '',
-			'after_body_show'  => '',
+			'after_body_show'  => '0',
 			'before_body'      => '',
-			'before_body_show' => '',
+			'before_body_show' => '0',
 		);
 
 		$options = get_option( 'dco_iac' );

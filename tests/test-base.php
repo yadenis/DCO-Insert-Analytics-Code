@@ -10,11 +10,11 @@ class BaseTest extends WP_UnitTestCase {
 		// Default
 		$default = array(
 			'before_head' => '',
-			'before_head_show' => '',
+			'before_head_show' => '0',
 			'after_body' => '',
-			'after_body_show' => '',
+			'after_body_show' => '0',
 			'before_body' => '',
-			'before_body_show' => ''
+			'before_body_show' => '0'
 		);
 
 		$GLOBALS['dco_iac']->set_options();
@@ -26,9 +26,9 @@ class BaseTest extends WP_UnitTestCase {
 			'before_head' => 'before_head_test',
 			'before_head_show' => '0',
 			'after_body' => ' ',
-			'after_body_show' => '',
+			'after_body_show' => '1',
 			'before_body' => '',
-			'before_body_show' => ''
+			'before_body_show' => '2'
 		);
 
 		update_option( 'dco_iac', $example_options );
@@ -63,7 +63,7 @@ class BaseTest extends WP_UnitTestCase {
 		$this->assertEquals($example_options['before_head'], $GLOBALS['dco_iac']->get_option('before_head'), 'get_option method get wrong value');
 		
 		// Test for option with wrong name
-		$this->assertFalse($GLOBALS['dco_iac']->get_option('before_head1'), 'get_option dont return false for option with wrong name');
+		$this->assertFalse($GLOBALS['dco_iac']->get_option('before_head_wrong'), 'get_option dont return false for option with wrong name');
 	}
 
 	/*
