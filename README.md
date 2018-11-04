@@ -25,10 +25,20 @@ Filter to change show the code is inserted after &lt;body&gt;
 Filter to change the code is inserted before &lt;/body&gt;
 ## dco_iac_insert_before_body_show
 Filter to change show the code is inserted before &lt;/body&gt;
+## dco_iac_disable_do_shortcode
+Filter to disable shortcode processing in inserted codes
 
 # Examples of using filters
 ## Hardcoding override plugin settings
 ```php
+/*
+* $current - current plugin settings
+*
+* $options - plugin settings from database
+*
+* $default - default plugin settings
+*/
+
 function custom_get_options($current, $options, $default) {
     $array = array(
         'before_head' => '<!-- before </head> -->',
@@ -43,40 +53,37 @@ function custom_get_options($current, $options, $default) {
 }
 
 add_filter('dco_iac_get_options', 'custom_get_options', 10, 3);
-
-/*
-* $current - current plugin settings
-*
-* $options - plugin settings from database
-*
-* $default - default plugin settings
-*/
 ```
 
 ## Change before &lt;/head&gt; code
 ```php
+/*
+* $code - value from "before </head>" setting
+*/
+
 function custom_before_head_code( $code ) {
     return $code . '<!-- before <head> -->' . "\n";
 }
 
 add_filter( 'dco_iac_insert_before_head', 'custom_before_head_code' );
-
-/*
-* $code - value from "before </head>" setting
-*/
 ```
 
 ## Change before &lt;/body&gt; code show
 ```php
+/*
+* $value - value from "before </body> show" setting
+*/
+
 function custom_before_head_code( $value ) {
     return '2';
 }
 
 add_filter( 'dco_iac_insert_before_body_show', 'custom_before_body_show' );
+```
 
-/*
-* $value - value from "before </body> show" setting
-*/
+## Disable shortcode processing in insert codes
+```php
+add_filter('dco_iac_disable_do_shortcode', '__return_true');
 ```
 
 # Changelog
