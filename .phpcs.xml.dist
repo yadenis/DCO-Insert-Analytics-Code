@@ -18,10 +18,6 @@
 	<config name="minimum_supported_wp_version" value="4.6"/>
 	
 	<rule ref="PHPCompatibility"/>
-
-	<rule ref="WordPress">
-		<exclude name="WordPress.VIP"/>
-	</rule>
 	
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
