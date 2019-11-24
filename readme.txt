@@ -2,7 +2,7 @@
 Contributors: denisco
 Tags: analytics, metrika, yandex metrica, google analytics
 Requires at least: 4.6
-Tested up to: 5.1
+Tested up to: 5.3
 Requires PHP: 5.3
 Stable tag: 1.1.3
 License: GPLv2 or later
